@@ -23,7 +23,7 @@ router.post('/users/login', async (req, res) => {
   try {
     const user = await User.findByCredentials(cardId, pin);
     const token = await user.generateAuthToken();
-    res.send({
+    res.status(200).send({
       message: `Welcome ${user.name}`,
       token
     });
@@ -38,10 +38,16 @@ router.post('/users/logout', auth, async (req, res) => {
       return token.token !== req.token;
     });
     await req.user.save();
-    res.status(200).send();
+    res.status(200).send({
+      message: `Goodbye ${req.user.name}`
+    });
   } catch (error) {
-    res.status(500).send();
+    res.status(500).send(error);
   };
+});
+
+router.get('/users/me', auth, async (req, res) => {
+  res.send(req.user);
 });
 
 router.patch('/users/me', auth, async (req, res) => {

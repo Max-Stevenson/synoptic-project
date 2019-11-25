@@ -50,7 +50,7 @@ const userSchema = new Schema({
 
 userSchema.methods.generateAuthToken = async function () {
   const user = this;
-  const token = jwt.sign({_id: user._id.toString()}, process.env.JWT_SECRET);
+  const token = jwt.sign({_id: user._id.toString()}, process.env.JWT_SECRET, {expiresIn: '300 seconds'});
   user.tokens = user.tokens.concat({ token });
   await user.save();
   return token;
@@ -59,7 +59,7 @@ userSchema.methods.generateAuthToken = async function () {
 userSchema.statics.findByCredentials = async (cardId, pin) => {
   const user = await User.findOne({ cardId });
   if(!user) {
-      throw new Error('Unable to login');
+      throw new Error('Card not registered to user');
   };
   const isMatch = await bcrypt.compare(pin, user.pin);
   if(!isMatch) {
