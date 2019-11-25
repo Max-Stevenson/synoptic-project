@@ -1,13 +1,12 @@
 require('dotenv').config();
 const express = require("express");
-const MongoClient = require("mongodb").MongoClient;
+const mongoose = require('mongoose');
 
 const app = express();
-
 app.use(express.json());
 
 app.listen(3000, () => {
-  MongoClient.connect(process.env.MONGODB_URL, { useNewUrlParser: true }, (error) => {
+  mongoose.connect(process.env.MONGODB_URL, {useUnifiedTopology: true, useNewUrlParser: true }, (error) => {
     if (error) {
       throw error;
     };
