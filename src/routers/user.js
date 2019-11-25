@@ -15,6 +15,13 @@ router.post('/users', async (req, res) => {
   };
 });
 
+router.get('/users/:id', async (req, res) => {
+  const user = await User.find({
+    employeeId: req.params.id
+  });
+  res.send(user);
+});
+
 router.get('/users', (req, res) => {
   res.send('Hello');
 });
