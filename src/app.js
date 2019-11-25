@@ -1,12 +1,10 @@
 require('dotenv').config();
-const Express = require("express");
-const BodyParser = require("body-parser");
+const express = require("express");
 const MongoClient = require("mongodb").MongoClient;
 
-const app = Express();
+const app = express();
 
-app.use(BodyParser.json());
-app.use(BodyParser.urlencoded({ extended: true }));
+app.use(express.json());
 
 app.listen(3000, () => {
   MongoClient.connect(process.env.MONGODB_URL, { useNewUrlParser: true }, (error) => {
