@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
@@ -38,6 +39,14 @@ const userSchema = new Schema({
     type: Number,
     default: 0
   }
+});
+
+userSchema.pre('save', async function(next) {
+  const user = this;
+  if (user.isModified('pin')) {
+    user.pin = await bcrypt.hash(user.pin, 8)
+  }
+  next();
 });
 
 const User = mongoose.model('User', userSchema);

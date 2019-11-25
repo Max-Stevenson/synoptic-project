@@ -12,6 +12,6 @@ app.listen(3000, () => {
     if (error) {
       throw error;
     };
-    console.log("Connected to `" + process.env.DATABASE_NAME + "`!");
+    console.log("Connected to: " + process.env.DATABASE_NAME);
   });
 });
