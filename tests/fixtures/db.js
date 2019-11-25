@@ -20,13 +20,10 @@ const userOne = {
 const setupDatabase = async () => {
     await User.deleteMany();
     await new User(userOne).save();
-    await new User(userTwo).save();
 };
 
 module.exports = {
     userOne,
     userOneId,
-    userTwo,
-    userTwoId,
     setupDatabase
 };
