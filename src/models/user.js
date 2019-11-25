@@ -41,6 +41,18 @@ const userSchema = new Schema({
   }
 });
 
+userSchema.statics.findByCredentials = async (cardId, pin) => {
+  const user = await User.findOne({ cardId });
+  if(!user) {
+      throw new Error('Unable to login');
+  };
+  const isMatch = await bcrypt.compare(pin, user.pin);
+  if(!isMatch) {
+      throw new Error('Unable to login');
+  };
+  return user;
+};
+
 userSchema.pre('save', async function(next) {
   const user = this;
   if (user.isModified('pin')) {

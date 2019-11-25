@@ -15,15 +15,18 @@ router.post('/users', async (req, res) => {
   };
 });
 
-router.get('/users/:id', async (req, res) => {
-  const user = await User.find({
-    employeeId: req.params.id
-  });
-  res.send(user);
-});
+router.post('/users/login', async (req, res) => {
+  const cardId = req.body.cardId;
+  const pin = req.body.pin;
 
-router.get('/users', (req, res) => {
-  res.send('Hello');
+  try {
+    const user = await User.findByCredentials(cardId, pin);
+    res.send({
+      message: `Welcome ${user.name}`
+    });
+  } catch (error) {
+    res.status(400).send();
+  };
 });
 
 module.exports = router;
