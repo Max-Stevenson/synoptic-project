@@ -8,8 +8,11 @@ router.post('/users', async (req, res) => {
     await user.save();
     res.status(201).send(user);
   } catch (error) {
-    res.status(500).send(error)
-  }
+    if (error.code === 11000) {
+      res.status(500).send('Error: employee ID already in use');
+    };
+    res.status(500).send(error);
+  };
 });
 
 router.get('/users', (req, res) => {
