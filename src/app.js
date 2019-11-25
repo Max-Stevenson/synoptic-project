@@ -8,7 +8,7 @@ app.use(express.json());
 app.use('/api/v1', userRouter);
 
 app.listen(3000, () => {
-  mongoose.connect(process.env.MONGODB_URL, {useUnifiedTopology: true, useNewUrlParser: true }, (error) => {
+  mongoose.connect(process.env.MONGODB_URL, {useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true }, (error) => {
     if (error) {
       throw error;
     };

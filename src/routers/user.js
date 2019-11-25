@@ -21,12 +21,18 @@ router.post('/users/login', async (req, res) => {
 
   try {
     const user = await User.findByCredentials(cardId, pin);
+    const token = await user.generateAuthToken();
     res.send({
-      message: `Welcome ${user.name}`
+      message: `Welcome ${user.name}`,
+      token
     });
   } catch (error) {
     res.status(400).send();
   };
+});
+
+router.patch('/users/me', async (req, res) => {
+
 });
 
 module.exports = router;
