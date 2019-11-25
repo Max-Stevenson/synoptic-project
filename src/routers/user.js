@@ -1,6 +1,6 @@
 const express = require('express');
 const User = require('../models/user');
-const auth = require ('../middleware/authentication');
+const auth = require('../middleware/authentication');
 const router = new express.Router();
 
 router.post('/users', async (req, res) => {
@@ -34,18 +34,36 @@ router.post('/users/login', async (req, res) => {
 
 router.post('/users/logout', auth, async (req, res) => {
   try {
-      req.user.tokens = req.user.tokens.filter((token) => {
-          return token.token !== req.token;
-      });
-      await req.user.save();
-      res.status(200).send();
+    req.user.tokens = req.user.tokens.filter((token) => {
+      return token.token !== req.token;
+    });
+    await req.user.save();
+    res.status(200).send();
   } catch (error) {
-      res.status(500).send();
+    res.status(500).send();
   };
 });
 
-router.patch('/users/me', async (req, res) => {
+router.patch('/users/me', auth, async (req, res) => {
+  const body = req.body;
+  const allowedUpdate = ['name', 'email', 'pin', 'cardId', 'accountBalance'];
+  const updates = Object.keys(body);
+  const isValidOperation = updates.every((item) => { return allowedUpdate.includes(item) });
 
+  if (!isValidOperation) {
+    return res.status(400).send({ error: 'You cannot update this field' });
+  };
+
+  try {
+    const user = req.user;
+    updates.forEach((update) => {
+      user[update] = body[update];
+    });
+    await user.save();
+    res.status(200).send(user);
+  } catch (error) {
+    res.status(500).send(error);
+  };
 });
 
 module.exports = router;
