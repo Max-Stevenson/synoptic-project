@@ -19,11 +19,12 @@ const userSchema = new Schema({
     trim: true
   },
   mobileNumber: {
-    type: Number,
+    type: String,
     required: true,
+    max: 11
   },
   pin: {
-    type: Number,
+    type: String,
     required: true,
     min: 4,
     max: 4
@@ -31,7 +32,11 @@ const userSchema = new Schema({
   cardId: {
     type: String,
     min: 16,
-    max: 16
+    max: 16,
+  },
+  accountBalance: {
+    type: Number,
+    default: 0
   }
 });
 
