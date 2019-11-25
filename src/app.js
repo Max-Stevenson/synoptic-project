@@ -1,17 +1,13 @@
 require('dotenv').config();
+require('./db/mongoose');
 const express = require("express");
-const mongoose = require('mongoose');
 const userRouter = require('./routers/user');
+const port = process.env.PORT;
 
 const app = express();
 app.use(express.json());
 app.use('/api/v1', userRouter);
 
-app.listen(3000, () => {
-  mongoose.connect(process.env.MONGODB_URL, {useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true }, (error) => {
-    if (error) {
-      throw error;
-    };
-    console.log("Connected to: " + process.env.DATABASE_NAME);
-  });
+app.listen(port, () => {
+  console.log('Server up on port: ' + port);
 });

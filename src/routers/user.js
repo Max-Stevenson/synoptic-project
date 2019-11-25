@@ -10,7 +10,7 @@ router.post('/users', async (req, res) => {
     res.status(201).send(user);
   } catch (error) {
     if (error.code === 11000) {
-      res.status(500).send('Error: employee ID already in use');
+      return res.status(500).send('Error: employee ID already in use');
     };
     res.status(500).send(error);
   };

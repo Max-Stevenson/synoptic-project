@@ -33,6 +33,7 @@ const userSchema = new Schema({
   },
   cardId: {
     type: String,
+    default: 'abc123efg456hij0',
     min: 16,
     max: 16,
   },
