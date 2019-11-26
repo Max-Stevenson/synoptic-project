@@ -10,7 +10,7 @@ router.post('/users', async (req, res) => {
     res.status(201).send(user);
   } catch (error) {
     if (error.code === 11000) {
-      return res.status(500).send('Error: employee ID already in use');
+      return res.status(500).send({error: 'employee ID already in use'});
     };
     res.status(500).send(error);
   };
@@ -28,7 +28,7 @@ router.post('/users/login', async (req, res) => {
       token
     });
   } catch (error) {
-    res.status(400).send(error.message);
+    res.status(400).send({error: error.message});
   };
 });
 
