@@ -11,7 +11,8 @@ const testUser = {
   "email": "test@test.com",
   "mobileNumber": "07123456789",
   "cardId": "abc123efg456hij1",
-  "pin": "1234"
+  "pin": "1234",
+  "accountBalance": 0
 };
 
 test('Should log in existing user', async () => {
@@ -35,7 +36,7 @@ test('Should create a new user', async () => {
   expect(response.body.employeeId).toBe(testUser.employeeId);
 });
 
-test('Authenticated user can edit account details', async () => {
+test('Authorized user can edit account details', async () => {
   expect(userOne.email).toBe('testUser@testing.com');
   const response = await request(app).patch('/api/v1/users/me')
   .set('Authorization', `Bearer ${userOne.tokens[0].token}`)
@@ -47,16 +48,28 @@ test('Authenticated user can edit account details', async () => {
   expect(response.body.email).toBe('testUser@aol.com');
 });
 
-test('Authenticated user top up accountBalance', async () => {
+test('Authorized user can top up accountBalance', async () => {
   expect(userOne.accountBalance).toBe(undefined);    
-  const response = await request(app).patch('/api/v1/users/me')
+  const response = await request(app).patch('/api/v1/users/me/balance')
   .set('Authorization', `Bearer ${userOne.tokens[0].token}`)
   .send({
-    accountBalance: 1000
+    "action": "increase",
+    "amount": 5000
   })
   .expect(200);
 
-  expect(response.body.accountBalance).toBe(1000);
+  expect(response.body.accountBalance).toBe(5000);
+});
+
+test('Authorized user cannot decrease accountBalance below 0', async () => {
+  const response = await request(app).patch('/api/v1/users/me/balance')
+  .set('Authorization', `Bearer ${userOne.tokens[0].token}`)
+  .send({
+    "action": "decrease",
+    "amount": 1
+  })
+  .expect(400);
+  expect(response.body.error).toBe('insufficient funds in account for purchase');
 });
 
 test('Should not create a user with an existing employeeId', async () => {
@@ -87,7 +100,7 @@ test('Should return card not registered error for incorrect cardId', async () =>
   expect(response.body.error).toBe('card not registered to user');
 });
 
-test('Should logout an authenticated user', async () => {
+test('Should logout an authorized user', async () => {
   const response = await request(app).post('/api/v1/users/login').send({
     cardId: userOne.cardId,
     pin: userOne.pin
@@ -101,7 +114,7 @@ test('Should logout an authenticated user', async () => {
     .send().expect(200);
 });
 
-test('Should return error for logout req with an unauthenticated user', async () => {
+test('Should return error for logout req with an unauthorized user', async () => {
   const response = await request(app)
     .post('/api/v1/users/logout')
     .send().expect(401);
