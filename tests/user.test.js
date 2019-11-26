@@ -35,7 +35,19 @@ test('Should create a new user', async () => {
   expect(response.body.employeeId).toBe(testUser.employeeId);
 });
 
-test('Authenticated can top up balance', async () => {
+test('Authenticated user can edit account details', async () => {
+  expect(userOne.email).toBe('testUser@testing.com');
+  const response = await request(app).patch('/api/v1/users/me')
+  .set('Authorization', `Bearer ${userOne.tokens[0].token}`)
+  .send({
+    email: "testUser@aol.com"
+  })
+  .expect(200);
+
+  expect(response.body.email).toBe('testUser@aol.com');
+});
+
+test('Authenticated user top up accountBalance', async () => {
   expect(userOne.accountBalance).toBe(undefined);    
   const response = await request(app).patch('/api/v1/users/me')
   .set('Authorization', `Bearer ${userOne.tokens[0].token}`)

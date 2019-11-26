@@ -52,7 +52,7 @@ router.get('/users/me', auth, async (req, res) => {
 
 router.patch('/users/me', auth, async (req, res) => {
   const body = req.body;
-  const allowedUpdate = ['name', 'email', 'pin', 'cardId', 'accountBalance'];
+  const allowedUpdate = ['name', 'email', 'pin', 'cardId'];
   const updates = Object.keys(body);
   const isValidOperation = updates.every((item) => { return allowedUpdate.includes(item) });
 
@@ -70,6 +70,17 @@ router.patch('/users/me', auth, async (req, res) => {
   } catch (error) {
     res.status(500).send(error);
   };
+});
+
+router.patch('/users/me/balance', auth, async (req, res) => {
+  const body = req.body;
+  const user = req.user;
+  if(body.action === 'increase') {
+
+  } else if (body.action === 'decrease') {
+
+  };
+  res.send(200);
 });
 
 module.exports = router;
