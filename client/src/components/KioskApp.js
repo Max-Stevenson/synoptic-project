@@ -2,6 +2,9 @@ import React from 'react';
 import axios from 'axios';
 
 export default class KioskApp extends React.Component {
+  state = {
+    message: undefined
+  };
 
   handleFormSubmit = (event) => {
     event.preventDefault();
@@ -11,7 +14,10 @@ export default class KioskApp extends React.Component {
       cardId,
       pin
     }).then((res) => {
-      console.log(res);
+      this.setState({
+        message: res.data.message
+      });
+      console.log(this.state.message);
     });
   };
 
@@ -24,6 +30,7 @@ export default class KioskApp extends React.Component {
           <input type="password" name="pin" placeholder="Pin"></input>
           <button>Log in</button>
         </form>
+        {this.state.message && <p>{this.state.message}</p>}
       </div>
     );
   };
