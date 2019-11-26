@@ -26,11 +26,11 @@ export default class KioskApp extends React.Component {
       <div>
         <h1>First Catering Ltd</h1>
         <form onSubmit={this.handleFormSubmit}>
-          <input type="text" name="cardId" placeholder="Card ID"></input>
-          <input type="password" name="pin" placeholder="Pin"></input>
+          <input type="text" name="cardId" placeholder="Card ID" required={true}></input>
+          <input type="password" name="pin" placeholder="Pin" required={true}></input>
           <button>Log in</button>
         </form>
-        {this.state.message && <p>{this.state.message}</p>}
+        {this.state.message && <h2>{this.state.message}</h2>}
       </div>
     );
   };
