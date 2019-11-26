@@ -5,6 +5,14 @@ const User = require('../src/models/user');
 const { userOne, userOneId, setupDatabase } = require('./fixtures/db');
 
 beforeEach(setupDatabase);
+const testUser = {
+  "name": "test data",
+  "employeeId": "A002",
+  "email": "test@test.com",
+  "mobileNumber": "07123456789",
+  "cardId": "abc123efg456hij1",
+  "pin": "1234"
+};
 
 test('Should log in existing user', async () => {
   const response = await request(app).post('/api/v1/users/login').send({
@@ -18,15 +26,6 @@ test('Should log in existing user', async () => {
 });
 
 test('Should create a new user', async () => {
-  const testUser = {
-    "name": "test data",
-    "employeeId": "A002",
-    "email": "test@test.com",
-    "mobileNumber": "07123456789",
-    "cardId": "abc123efg456hij1",
-    "pin": "1234"
-  };
-
   const response = await request(app)
   .post('/api/v1/users')
   .send(testUser)
@@ -36,15 +35,20 @@ test('Should create a new user', async () => {
   expect(response.body.employeeId).toBe(testUser.employeeId);
 });
 
+test('Authenticated can top up balance', async () => {
+  expect(userOne.accountBalance).toBe(undefined);    
+  const response = await request(app).patch('/api/v1/users/me')
+  .set('Authorization', `Bearer ${userOne.tokens[0].token}`)
+  .send({
+    accountBalance: 1000
+  })
+  .expect(200);
+
+  expect(response.body.accountBalance).toBe(1000);
+});
+
 test('Should not create a user with an existing employeeId', async () => {
-  const testUser = {
-    "name": "test data",
-    "employeeId": userOne.employeeId,
-    "email": "test@test.com",
-    "mobileNumber": "07123456789",
-    "cardId": "abc123efg456hij1",
-    "pin": "1234"
-  };
+  testUser.employeeId = userOne.employeeId;
 
   const response = await request(app)
   .post('/api/v1/users')
