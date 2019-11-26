@@ -60,11 +60,11 @@ userSchema.methods.generateAuthToken = async function () {
 userSchema.statics.findByCredentials = async (cardId, pin) => {
   const user = await User.findOne({ cardId });
   if(!user) {
-      throw new Error('Card not registered to user');
+    throw new Error('Card not registered to user');
   };
   const isMatch = await bcrypt.compare(pin, user.pin);
   if(!isMatch) {
-      throw new Error('Unable to login');
+    throw new Error('Unable to login');
   };
   return user;
 };

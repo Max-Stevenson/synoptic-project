@@ -7,10 +7,10 @@ const { userOne, userOneId, setupDatabase } = require('./fixtures/db');
 beforeEach(setupDatabase);
 
 test('Should log in existing user', async () => {
-  const response = await request(app).post('api/v1/users/login').send({
+  const response = await request(app).post('/api/v1/users/login').send({
       cardId: userOne.cardId,
       pin: userOne.pin
-  }).expect(200);
+  }).expect(200);  
 
   const user = await User.findById(userOneId);
   expect(response.body.token).toBe(user.tokens[1].token)
