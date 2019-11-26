@@ -10,7 +10,7 @@ router.post('/users', async (req, res) => {
     res.status(201).send(user);
   } catch (error) {
     if (error.code === 11000) {
-      return res.status(500).send({error: 'employee ID already in use'});
+      return res.status(400).send({error: 'employee ID must be unique'});
     };
     res.status(500).send(error);
   };
@@ -24,7 +24,7 @@ router.post('/users/login', async (req, res) => {
     const user = await User.findByCredentials(cardId, pin);
     const token = await user.generateAuthToken();
     res.status(200).send({
-      message: `Welcome ${user.name}`,
+      message: `welcome ${user.name}`,
       token
     });
   } catch (error) {
@@ -39,7 +39,7 @@ router.post('/users/logout', auth, async (req, res) => {
     });
     await req.user.save();
     res.status(200).send({
-      message: `Goodbye ${req.user.name}`
+      message: `goodbye ${req.user.name}`
     });
   } catch (error) {
     res.status(500).send(error);
