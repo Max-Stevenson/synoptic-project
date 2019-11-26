@@ -34,3 +34,25 @@ test('Should return card not registered error for incorrect cardId', async () =>
 
   expect(response.body.error).toBe('card not registered to user');
 });
+
+test('Should logout an authenticated user', async () => {
+  const response = await request(app).post('/api/v1/users/login').send({
+    cardId: userOne.cardId,
+    pin: userOne.pin
+  }).expect(200);
+
+  const token = response.body.token;
+
+  await request(app)
+  .post('/api/v1/users/logout')
+  .set('Authorization', `Bearer ${token}`)
+  .send().expect(200);
+});
+
+test('Should return error for logout req with an unauthenticated user', async () => {
+  const response = await request(app)
+  .post('/api/v1/users/logout')
+  .send().expect(401);  
+
+  expect(response.body.error).toBe('please authenticate');
+});
