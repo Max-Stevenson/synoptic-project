@@ -75,12 +75,16 @@ router.patch('/users/me', auth, async (req, res) => {
 router.patch('/users/me/balance', auth, async (req, res) => {
   const body = req.body;
   const user = req.user;
-  if(body.action === 'increase') {
-
+  if (body.action === 'increase') {
+    user.accountBalance += body.amount;
   } else if (body.action === 'decrease') {
-
+    if (user.accountBalance - body.amount < 0) {
+      return res.status(400).send({ error: "insufficient funds in account for purchase"});
+    };
+    user.accountBalance -= body.amount;
   };
-  res.send(200);
+  await user.save();
+  res.status(200).send(user);
 });
 
 module.exports = router;
