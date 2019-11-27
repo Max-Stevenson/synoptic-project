@@ -22,4 +22,4 @@ the system will show a welcome message wit hthe user's name associated with the 
 
 ![](screenshots/logout.png)
 
-![](screenshots/edit.png)
+![](screenshots/editAccount.png)
