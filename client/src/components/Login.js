@@ -3,7 +3,6 @@ import axios from 'axios';
 
 export default class Login extends React.Component {
   constructor(props) {
-    console.log(props);
     super(props);
     this.state = {
       message: undefined
@@ -19,6 +18,9 @@ export default class Login extends React.Component {
       pin
     }).then((res) => {
       if (res.status === 200) {
+        this.setState({
+          isAuthenticated: true
+        });
         this.props.history.push({
           pathname: '/dashboard',
           state: {
