@@ -19,7 +19,12 @@ export default class Login extends React.Component {
       pin
     }).then((res) => {
       if (res.status === 200) {
-        this.props.history.push('/dashboard');
+        this.props.history.push({
+          pathname: '/dashboard',
+          state: {
+            message: res.data.message
+          }
+        });
       };
     }).catch((error) => {
       if (error.response.status === 400) {
