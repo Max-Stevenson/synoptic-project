@@ -18,13 +18,15 @@ export default class Login extends React.Component {
       pin
     }).then((res) => {
       if (res.status === 200) {
-        this.props.history('/dashboard');
+        this.context.history('/dashboard');
       };
     }).catch((error) => {
       if (error.response.status === 400) {
         this.setState({
           message: error.response.data.error
         });
+      } else {
+        console.log(error);
       };
     });
   };
