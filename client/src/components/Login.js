@@ -1,9 +1,14 @@
 import React from 'react';
+import axios from 'axios';
 
 export default class Login extends React.Component {
-  state = {
-    message: undefined
+  constructor(props) {
+    super(props);
+    this.state = {
+      message: undefined
+    };
   };
+  
 
   handleFormSubmit = (event) => {
     event.preventDefault();
@@ -13,9 +18,12 @@ export default class Login extends React.Component {
       cardId,
       pin
     }).then((res) => {
-      this.setState({
-        message: res.data.message
-      });
+      if (res.status === 200) {
+        this.props.history('/dashboard');
+      } else if (res.status === 400) {
+      };
+    }).catch((error) => {
+      console.log(error.response.data.error);
     });
   };
 
@@ -28,7 +36,6 @@ export default class Login extends React.Component {
           <input type="password" name="pin" placeholder="Pin" required={true}></input>
           <button>Log in</button>
         </form>
-        {this.state.message && <h2>{this.state.message}</h2>}
       </div>
     );
   };

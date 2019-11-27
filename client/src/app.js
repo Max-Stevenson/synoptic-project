@@ -9,7 +9,10 @@ import '../styles/styles.scss';
 
 const Routes = (
   <BrowserRouter>
-    <Route path="/" component={Login}/>
+    <div>
+      <Route path="/" component={Login} exact={true}/>
+      <Route path="/dashboard" component={AccountDashboard}/>
+    </div>
   </BrowserRouter>
 );
 
