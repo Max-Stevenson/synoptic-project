@@ -28,7 +28,7 @@ the system will show a welcome message wit hthe user's name associated with the 
 
 From the given specifications I constructed the data model of a User.
 
-```json
+```javascript
 {
   name: {
     type: String,
