@@ -57,7 +57,7 @@ router.patch('/users/me', auth, async (req, res) => {
   const isValidOperation = updates.every((item) => { return allowedUpdate.includes(item) });
 
   if (!isValidOperation) {
-    return res.status(400).send({ error: 'You cannot update this field' });
+    return res.status(400).send({ error: 'you cannot update this field' });
   };
 
   try {

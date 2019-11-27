@@ -48,6 +48,18 @@ test('Authorized user can edit account details', async () => {
   expect(response.body.email).toBe('testUser@aol.com');
 });
 
+test('Authorized user cannot edit protected account details', async () => {
+  expect(userOne.email).toBe('testUser@testing.com');
+  const response = await request(app).patch('/api/v1/users/me')
+  .set('Authorization', `Bearer ${userOne.tokens[0].token}`)
+  .send({
+    employeeId: "A001"
+  })
+  .expect(400);
+
+  expect(response.body.error).toBe('you cannot update this field');
+});
+
 test('Authorized user can top up accountBalance', async () => {
   expect(userOne.accountBalance).toBe(undefined);    
   const response = await request(app).patch('/api/v1/users/me/balance')
