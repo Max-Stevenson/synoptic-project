@@ -9,7 +9,6 @@ export default class Login extends React.Component {
     };
   };
   
-
   handleFormSubmit = (event) => {
     event.preventDefault();
     const cardId = event.target.elements.cardId.value.trim();
@@ -20,10 +19,13 @@ export default class Login extends React.Component {
     }).then((res) => {
       if (res.status === 200) {
         this.props.history('/dashboard');
-      } else if (res.status === 400) {
       };
     }).catch((error) => {
-      console.log(error.response.data.error);
+      if (error.response.status === 400) {
+        this.setState({
+          message: error.response.data.error
+        });
+      };
     });
   };
 
@@ -35,6 +37,7 @@ export default class Login extends React.Component {
           <input type="text" name="cardId" placeholder="Card ID" required={true}></input>
           <input type="password" name="pin" placeholder="Pin" required={true}></input>
           <button>Log in</button>
+          {this.state.message && <h2>{this.state.message}</h2>}
         </form>
       </div>
     );
