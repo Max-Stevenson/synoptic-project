@@ -12,7 +12,7 @@ the system will show a welcome message wit hthe user's name associated with the 
 - top up
 > ... will allow Bows Formula One employees to use their existing data cards in the kiosks to register and top up with money.
 - pay
-> ... shall be able to use theri existing employee cards to top up and purchase food at their existing kiosk terminals.
+> ... shall be able to use their existing employee cards to top up and purchase food at their existing kiosk terminals.
 
 ## API Sequence diagrams
 
@@ -21,3 +21,5 @@ the system will show a welcome message wit hthe user's name associated with the 
 ![](screenshots/login.png)
 
 ![](screenshots/logout.png)
+
+![](screenshots/edit.png)
