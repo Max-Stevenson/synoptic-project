@@ -1,14 +1,17 @@
 import React from 'react';
 import axios from 'axios';
+import { setLoginPending } from '../actions/userActions';
+import { connect } from 'react-redux';
 
-export default class Login extends React.Component {
+class Login extends React.Component {
   constructor(props) {
+    console.log(props);
     super(props);
     this.state = {
       message: undefined
     };
   };
-  
+
   handleFormSubmit = (event) => {
     event.preventDefault();
     const cardId = event.target.elements.cardId.value.trim();
@@ -51,3 +54,11 @@ export default class Login extends React.Component {
     );
   };
 };
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setLoginPending: () => dispatch(setLoginPending(true))
+  };
+};
+
+export default connect(mapDispatchToProps)(Login);
