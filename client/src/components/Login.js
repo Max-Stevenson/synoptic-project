@@ -3,6 +3,7 @@ import axios from 'axios';
 
 export default class Login extends React.Component {
   constructor(props) {
+    console.log(props);
     super(props);
     this.state = {
       message: undefined
@@ -18,7 +19,7 @@ export default class Login extends React.Component {
       pin
     }).then((res) => {
       if (res.status === 200) {
-        this.context.history('/dashboard');
+        this.props.history.push('/dashboard');
       };
     }).catch((error) => {
       if (error.response.status === 400) {
