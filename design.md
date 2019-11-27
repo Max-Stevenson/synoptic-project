@@ -87,8 +87,9 @@ It didn't make sense for a user to be able to directly manipulate their balance.
 the system will show a welcome message wit hthe user's name associated with the card.
 - logout
 > It is envisaged that when the user taps their card a second time the system informs the user and says "Goodbye".
-~~- top up~~
-~~- pay~~
+- ~~top up~~
+- ~~pay~~
 - edit balance
 > ... will allow Bows Formula One employees to use their existing data cards in the kiosks to register and top up with money.
+>
 > ... shall be able to use their existing employee cards to top up and purchase food at their existing kiosk terminals.
