@@ -23,3 +23,56 @@ the system will show a welcome message wit hthe user's name associated with the 
 ![](screenshots/logout.png)
 
 ![](screenshots/editAccount.png)
+
+## User data model
+
+From the given specifications I constructed the data model of a User.
+
+```json
+{
+  name: {
+    type: String,
+    required: true,
+    trim: true
+  },
+  employeeId: {
+    type: String,
+    unique: true,
+    required: true,
+    trim: true
+  },
+  email: {
+    type: String,
+    required: true,
+    trim: true
+  },
+  mobileNumber: {
+    type: String,
+    required: true,
+    max: 11
+  },
+  pin: {
+    type: String,
+    required: true,
+    min: 4,
+    max: 4
+  },
+  cardId: {
+    type: String,
+    required: true,
+    min: 16,
+    max: 16,
+  },
+  accountBalance: {
+    type: Number,
+    default: 0,
+    min: 0
+  },
+  tokens: [{
+    token: {
+        type: String,
+        required: true
+    }
+  }]
+}
+```
