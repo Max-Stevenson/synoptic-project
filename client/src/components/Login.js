@@ -18,9 +18,7 @@ export default class Login extends React.Component {
       pin
     }).then((res) => {
       if (res.status === 200) {
-        this.setState({
-          isAuthenticated: true
-        });
+        sessionStorage.setItem('jwtToken', res.data.token);
         this.props.history.push({
           pathname: '/dashboard',
           state: {
