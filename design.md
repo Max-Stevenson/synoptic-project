@@ -11,9 +11,13 @@ the system will show a welcome message wit hthe user's name associated with the 
 > It is envisaged that when the user taps their card a second time the system informs the user and says "Goodbye".
 - top up
 > ... will allow Bows Formula One employees to use their existing data cards in the kiosks to register and top up with money.
+- pay
+> ... shall be able to use theri existing employee cards to top up and purchase food at their existing kiosk terminals.
 
 ## API Sequence diagrams
 
 ![](screenshots/register.png)
 
 ![](screenshots/login.png)
+
+![](screenshots/logout.png)
