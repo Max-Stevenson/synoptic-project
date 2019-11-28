@@ -7,7 +7,6 @@ import axios from 'axios';
 class AccountDashboard extends React.Component {
 	constructor(props) {
 		super(props);
-		this.handleTopUp = this.handleTopUp.bind(this);
 	};
 
 	componentDidMount() {
@@ -27,7 +26,7 @@ class AccountDashboard extends React.Component {
 		});
 	};
 
-	handleTopUp(event) {
+	handleTopUp = (event) => {
 		event.preventDefault();
 		this.props.history.push({pathname: '/top-up'});
 	};
@@ -39,7 +38,7 @@ class AccountDashboard extends React.Component {
 				<p className="welcome_message">Welcome {this.props.accountDetails.name}</p>
 				<p>Your account balance: {
 					new Intl.NumberFormat('en-IN',{ style: 'currency', currency: 'GBP' })
-					.format(convertPenceToPound(parseInt(this.props.accountDetails.accountBalance)))}
+					.format(convertPenceToPound(this.props.accountDetails.accountBalance))}
 				</p>
 				<button onClick={this.handleTopUp}>Top Up</button>
 			</div>
