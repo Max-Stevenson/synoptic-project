@@ -21,6 +21,11 @@ export default (state = userReducerDefaultState, action) => {
       return Object.assign({}, state, {
         loginError: action.loginError
       });
+
+    case 'SET_AUTHORIZATION':
+      return Object.assign({}, state, { 
+        isAuthorized: action.isAuthorized
+      });
       
     default:
       return state;

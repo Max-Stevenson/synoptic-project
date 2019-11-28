@@ -1,19 +1,17 @@
 import React from 'react';
 import axios from 'axios';
-import { setLoginPending } from '../actions/userActions';
+import { setLoginPending, setLoginSuccess, setLoginError, setAuthorization } from '../actions/userActions';
 import { connect } from 'react-redux';
 
 class Login extends React.Component {
   constructor(props) {
     console.log(props);
     super(props);
-    this.state = {
-      message: undefined
-    };
   };
 
   handleFormSubmit = (event) => {
     event.preventDefault();
+    this.props.dispatch(setLoginPending(true));
     const cardId = event.target.elements.cardId.value.trim();
     const pin = event.target.elements.pin.value;
     axios.post('http://localhost:3000/api/v1/users/login', {
@@ -22,23 +20,26 @@ class Login extends React.Component {
     }).then((res) => {
       if (res.status === 200) {
         sessionStorage.setItem('jwtToken', res.data.token);
-        this.props.history.push({
-          pathname: '/dashboard',
-          state: {
-            message: res.data.message
-          }
-        });
+        this.props.dispatch(setLoginPending(false));
+        this.props.dispatch(setAuthorization(true));
+        this.props.dispatch(setLoginSuccess(true));
+        // this.props.history.push({
+        //   pathname: '/dashboard',
+        //   state: {
+        //     message: res.data.message
+        //   }
+        // });
       };
     }).catch((error) => {
       if (error.response.status === 400) {
-        this.setState({
-          message: error.response.data.error
-        });
+        this.props.dispatch(setLoginError(error.response.data.error));
       } else {
-        console.log(error);
+        this.props.dispatch(setLoginError(error));
       };
+      this.props.dispatch(setLoginPending(false));
     });
   };
+  
 
   render() {
     return (
@@ -48,17 +49,23 @@ class Login extends React.Component {
           <input type="text" name="cardId" placeholder="Card ID" required={true}></input>
           <input type="password" name="pin" placeholder="Pin" required={true}></input>
           <button>Log in</button>
-          {this.state.message && <h2>{this.state.message}</h2>}
+          {this.props.isLoginPending && <p>Log in pending...</p>}
+          {this.props.loginSuccess && <p>Login successful</p>}
+          {this.props.isAuthorized && <p>User is Authorized</p>}
+          {this.props.loginError && <p>{this.props.loginError}</p>}
         </form>
       </div>
     );
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapStateToProps = (state) => {
   return {
-    setLoginPending: () => dispatch(setLoginPending(true))
+    isLoginPending: state.loginDetails.isLoginPending,
+    loginSuccess: state.loginDetails.isLoginSuccess,
+    loginError: state.loginDetails.loginError,
+    isAuthorized: state.loginDetails.isAuthorized
   };
 };
 
-export default connect(mapDispatchToProps)(Login);
+export default connect(mapStateToProps)(Login);
