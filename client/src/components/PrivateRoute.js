@@ -1,12 +1,21 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-const PrivateRoute = ({ component: Component, ...rest }) => (
-  <Route {...rest} render={(props) => (
-    sessionStorage.getItem('jwtToken')
-      ? <Component {...props} />
-      : <Redirect to='/' />
-  )} />
-);
+const PrivateRoute = ({ component: Component, ...rest }) => {
+  return (
+    <Route {...rest} render={props => (
+      rest.isAuthorized === true ?
+        <Component {...props} />
+        : <Redirect to="/" />
+    )} />
+  );
+};
 
-export default PrivateRoute;
+const mapStateToProps = (state) => {
+  return {
+    isAuthorized: state.loginDetails.isAuthorized
+  };
+};
+
+export default connect(mapStateToProps)(PrivateRoute);
