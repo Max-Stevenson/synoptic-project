@@ -10,7 +10,6 @@ import { connect } from 'react-redux';
 
 class Login extends React.Component {
   constructor(props) {
-    console.log(props);
     super(props);
   };
 
