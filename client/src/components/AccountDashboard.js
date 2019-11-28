@@ -15,8 +15,8 @@ class AccountDashboard extends React.Component {
 		config
 		).then((res) => {
 			console.log(res);	
-		}).catch((error) => {
-			if (error.status === 401) {
+		}).catch((error) => {			
+			if (error.response.status === 401) {
 				this.props.history.push({
           pathname: '/',
         });

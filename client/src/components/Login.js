@@ -5,7 +5,7 @@ import {
   setLoginSuccess, 
   setLoginError, 
   setAuthorization 
-} from '../actions/userActions';
+} from '../actions/loginActions';
 import { connect } from 'react-redux';
 
 class Login extends React.Component {
