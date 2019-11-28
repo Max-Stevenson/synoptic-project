@@ -1,15 +1,11 @@
 const userDetailsDefaultState = {
-  "accountBalance": 0,
-  "_id": "",
-  "name": "",
-  "employeeId": "",
-  "email": "",
-  "mobileNumber": "",
-  "cardId": ""
 };
 
 export default (state = userDetailsDefaultState, action) => {
-  switch (action.type) { 
+  switch (action.type) {
+    case 'SET_ACCOUNT_DETAILS':
+    return Object.assign({}, state, action.accountDetails);
+    
     default:
       return state;
   };

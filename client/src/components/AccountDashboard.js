@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { setAccountDetails } from '../actions/userActions';
 import axios from 'axios';
 
 class AccountDashboard extends React.Component {
@@ -14,7 +15,8 @@ class AccountDashboard extends React.Component {
 		axios.get('http://localhost:3000/api/v1/users/me',
 		config
 		).then((res) => {
-			console.log(res);	
+			console.log(res.data);	
+			this.props.dispatch(setAccountDetails(res.data));
 		}).catch((error) => {			
 			if (error.response.status === 401) {
 				this.props.history.push({
@@ -36,6 +38,7 @@ class AccountDashboard extends React.Component {
 
 const mapStateToProps = (state) => {
 	return {
+		accountDetails: state.userDetails
 	};
 };
 
