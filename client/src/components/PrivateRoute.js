@@ -3,7 +3,7 @@ import { Route, Redirect } from 'react-router-dom';
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route {...rest} render={(props) => (
-    props.isAuthenticated === true
+    sessionStorage.getItem('jwtToken')
       ? <Component {...props} />
       : <Redirect to='/' />
   )} />

@@ -1,6 +1,11 @@
 import React from 'react';
 import axios from 'axios';
-import { setLoginPending, setLoginSuccess, setLoginError, setAuthorization } from '../actions/userActions';
+import { 
+  setLoginPending, 
+  setLoginSuccess, 
+  setLoginError, 
+  setAuthorization 
+} from '../actions/userActions';
 import { connect } from 'react-redux';
 
 class Login extends React.Component {
@@ -23,12 +28,9 @@ class Login extends React.Component {
         this.props.dispatch(setLoginPending(false));
         this.props.dispatch(setAuthorization(true));
         this.props.dispatch(setLoginSuccess(true));
-        // this.props.history.push({
-        //   pathname: '/dashboard',
-        //   state: {
-        //     message: res.data.message
-        //   }
-        // });
+        this.props.history.push({
+          pathname: '/dashboard',
+        });
       };
     }).catch((error) => {
       if (error.response.status === 400) {
@@ -40,7 +42,6 @@ class Login extends React.Component {
     });
   };
   
-
   render() {
     return (
       <div>
