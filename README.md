@@ -19,14 +19,16 @@ npm run test
 
 Tests written using the [Jest](https://jestjs.io/) framework.
 
-- Should log in existing user
-- Should create a new user
-- Authorized user can edit account details
-- Authorized user cannot edit protected account details
-- Authorized user can top up accountBalance
-- Authorized user cannot decrease accountBalance below 0
-- Should not create a user with an existing employeeId
-- Should return vague error for correct cardId and incorrect pin
-- Should return card not registered error for incorrect cardId
-- Should logout an authorized user
-- Should return error for logout req with an unauthorized user
+| Test number | Test Description | Expected Outcome | Pass / Fail |
+|-------------|------------------|------------------|-------------|
+|1|Should log in existing user|status(200), welcome message|Pass|
+|2|Should create a new user|status(201), user object|Pass|
+|3|Authorized user can edit account details|status(200), user object|Pass|
+|4|Authorized user cannot edit protected account details|status(400), error message|Pass|
+|5|Authorized user can top up accountBalance|status(200), user object|Pass|
+|6|Authorized user cannot decrease accountBalance below 0|status(400), error message|Pass|
+|7|Should not create a user with an existing employeeId|status(400), error message|Pass|
+|8|Should return vague error for correct cardId and incorrect pin|status(400), error message|Pass|
+|9|Should return card not registered error for incorrect cardId|status(400), error message|Pass|
+|10|Should logout an authorized user|status(200), goodbye message|Pass|
+|11|Should return error for logout req with an unauthorized user|status(401), error message|Pass|
