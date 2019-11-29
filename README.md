@@ -28,7 +28,8 @@ Tests written using the [Jest](https://jestjs.io/) framework.
 |5|Authorized user can top up accountBalance|status(200), user object|Pass|
 |6|Authorized user cannot decrease accountBalance below 0|status(400), error message|Pass|
 |7|Should not create a user with an existing employeeId|status(400), error message|Pass|
-|8|Should return vague error for correct cardId and incorrect pin|status(400), error message|Pass|
-|9|Should return card not registered error for incorrect cardId|status(400), error message|Pass|
-|10|Should logout an authorized user|status(200), goodbye message|Pass|
-|11|Should return error for logout req with an unauthorized user|status(401), error message|Pass|
+|8|Should not create a user with an existing cardId|status(400), error message|Pass|
+|9|Should return vague error for correct cardId and incorrect pin|status(400), error message|Pass|
+|10|Should return card not registered error for incorrect cardId|status(400), error message|Pass|
+|11|Should logout an authorized user|status(200), goodbye message|Pass|
+|12|Should return error for logout req with an unauthorized user|status(401), error message|Pass|
