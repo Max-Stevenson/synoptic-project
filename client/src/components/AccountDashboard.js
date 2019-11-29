@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { setAccountDetails } from '../actions/userActions';
-import { 
-  setLoginPending, 
-  setLoginSuccess, 
-  setAuthorization 
+import {
+	setLoginPending,
+	setLoginSuccess,
+	setAuthorization
 } from '../actions/loginActions';
 import { convertPenceToPound } from '../utils/currencyFormatter';
 import axios from 'axios';
@@ -12,6 +12,9 @@ import axios from 'axios';
 class AccountDashboard extends React.Component {
 	constructor(props) {
 		super(props);
+		this.state = {
+			goodbyeMessage: undefined
+		};
 	};
 
 	componentDidMount() {
@@ -19,37 +22,38 @@ class AccountDashboard extends React.Component {
 			headers: { 'Authorization': sessionStorage.getItem('jwtToken') }
 		};
 		axios.get('http://localhost:3000/api/v1/users/me',
-		config
+			config
 		).then((res) => {
 			this.props.dispatch(setAccountDetails(res.data));
-		}).catch((error) => {			
+		}).catch((error) => {
 			if (error.response.status === 401) {
 				this.props.history.push({
-          pathname: '/',
-        });
+					pathname: '/',
+				});
 			};
 		});
 	};
 
 	handleTopUp = (event) => {
 		event.preventDefault();
-		this.props.history.push({pathname: '/top-up'});
+		this.props.history.push({ pathname: '/top-up' });
 	};
 
 	handlePurchase = (event) => {
 		event.preventDefault();
-		this.props.history.push({pathname: '/purchase'});
+		this.props.history.push({ pathname: '/purchase' });
 	};
 
 	handleLogout = (event) => {
 		const config = {
 			headers: { 'Authorization': sessionStorage.getItem('jwtToken') }
 		};
-		axios.post('http://localhost:3000/api/v1/users/logout',{} , config).then((res) => {
+		axios.post('http://localhost:3000/api/v1/users/logout', {}, config).then((res) => {
+			this.setState(() => ({ goodbyeMessage: res.data.message }));
 			this.props.dispatch(setLoginPending(false));
-      this.props.dispatch(setAuthorization(false));
+			this.props.dispatch(setAuthorization(false));
 			this.props.dispatch(setLoginSuccess(false));
-			this.props.history.push({pathname: '/'});
+			this.props.history.push({ pathname: '/' });
 		});
 	};
 
@@ -59,12 +63,13 @@ class AccountDashboard extends React.Component {
 				<h1>Account Dashboard</h1>
 				<p className="welcome_message">Welcome {this.props.accountDetails.name}</p>
 				<p>Your account balance: {
-					new Intl.NumberFormat('en-IN',{ style: 'currency', currency: 'GBP' })
-					.format(convertPenceToPound(this.props.accountDetails.accountBalance))}
+					new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'GBP' })
+						.format(convertPenceToPound(this.props.accountDetails.accountBalance))}
 				</p>
 				<button onClick={this.handleTopUp}>Top Up</button>
 				<button onClick={this.handlePurchase}>Make Purchase</button>
 				<button onClick={this.handleLogout}>Logout</button>
+				<p>{this.state.goodbyeMessage}</p>
 			</div>
 		);
 	};
