@@ -7,7 +7,7 @@ import { updateCart } from '../actions/userActions';
 class Purcase extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
+      this.state = {
       erorr: undefined
     };
   };
@@ -54,6 +54,7 @@ class Purcase extends React.Component {
         <button onClick={this.handleCheckout} name="checkout">Checkout</button>
         <p>Cart total: {new Intl.NumberFormat('en-IN',{ style: 'currency', currency: 'GBP' })
         .format(convertPenceToPound(this.props.cartTotal))}</p>
+        <p>{this.state.error}</p>
       </div>
     );
   };
