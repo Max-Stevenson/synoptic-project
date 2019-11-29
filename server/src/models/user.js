@@ -33,6 +33,7 @@ const userSchema = new Schema({
   },
   cardId: {
     type: String,
+    unique: true,
     required: true,
     min: 16,
     max: 16,
