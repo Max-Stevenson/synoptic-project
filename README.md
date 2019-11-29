@@ -33,3 +33,15 @@ Tests written using the [Jest](https://jestjs.io/) framework.
 |10|Should return card not registered error for incorrect cardId|status(400), error message|Pass|
 |11|Should logout an authorized user|status(200), goodbye message|Pass|
 |12|Should return error for logout req with an unauthorized user|status(401), error message|Pass|
+
+
+## Technology
+To build this project I used the following tech stack:
+
+### Client
+- [React](https://reactjs.org/)
+- [Redux](https://redux.js.org/)
+
+### Server
+- [Node.js](https://nodejs.org/en/)
+- [Express](https://expressjs.com/)
