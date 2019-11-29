@@ -1,5 +1,8 @@
 # Design of Membership System
 
+## Requirement Assumptions
+
+
 ## API design v2.0
 After initial designs were implemented I decided to extract the process of interacting with a user's accountBalance to a separate route.
 It didn't make sense for a user to be able to directly manipulate their balance.
