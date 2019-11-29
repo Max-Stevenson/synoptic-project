@@ -48,4 +48,4 @@ To build this project I used the following tech stack:
 - [mongoose](https://mongoosejs.com/)
 
 ### Database
-- [MongoDB Atlast](https://www.mongodb.com/cloud/atlas)
+- [MongoDB Atlas](https://www.mongodb.com/cloud/atlas)
