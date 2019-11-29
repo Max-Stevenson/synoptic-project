@@ -54,6 +54,7 @@ class Login extends React.Component {
           {this.props.isAuthorized && <p>User is Authorized</p>}
           {this.props.loginError && <p>{this.props.loginError}</p>}
         </form>
+        <button onClick={() => {this.props.history.push({pathname: '/register'})}}>Create New User</button>
       </div>
     );
   };
