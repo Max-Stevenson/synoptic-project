@@ -7,10 +7,9 @@ import { updateCart } from '../actions/userActions';
 class Purcase extends React.Component {
   constructor(props) {
     super(props);
-  };
-
-  calculateTotal = (amount) => {
-    this.props.dispatch(updateCart(amount));
+    this.state = {
+      erorr: undefined
+    };
   };
   
   handleSelection = (event) => {
@@ -27,8 +26,24 @@ class Purcase extends React.Component {
         amount += 100;
         break;
     };
-    this.calculateTotal(amount);
+    this.props.dispatch(updateCart(amount));
   };
+
+  handleCheckout = (event) => {
+    const config = {
+			headers: { 'Authorization': sessionStorage.getItem('jwtToken') }
+    };
+    const action = 'decrease';
+    const amount = this.props.cartTotal;
+    axios.patch('http://localhost:3000/api/v1/users/me/balance', 
+      { action,
+      amount },
+      config
+      ).then((res) => {
+        this.props.history.push({pathname: '/dashboard'})
+      }).catch((error) => {
+        this.setState(() => ({error: error.response.data.error}));
+    })};
 
   render() {
     return (
@@ -36,7 +51,7 @@ class Purcase extends React.Component {
         <button onClick={this.handleSelection} name="burger">Burger</button>
         <button onClick={this.handleSelection} name="fries">Fries</button>
         <button onClick={this.handleSelection} name="soda">Soda</button>
-        <button onClick={this.handleSelection} name="checkout">Checkout</button>
+        <button onClick={this.handleCheckout} name="checkout">Checkout</button>
         <p>Cart total: {new Intl.NumberFormat('en-IN',{ style: 'currency', currency: 'GBP' })
         .format(convertPenceToPound(this.props.cartTotal))}</p>
       </div>
