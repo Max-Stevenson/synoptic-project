@@ -45,3 +45,7 @@ To build this project I used the following tech stack:
 ### Server
 - [Node.js](https://nodejs.org/en/)
 - [Express](https://expressjs.com/)
+- [mongoose](https://mongoosejs.com/)
+
+### Database
+- [MongoDB Atlast](https://www.mongodb.com/cloud/atlas)
