@@ -33,9 +33,7 @@ class Register extends React.Component {
       }).then((res) => {
         this.props.history.push({pathname: '/'})
       }).catch((error) => {
-        console.log(error);
-        
-        // this.setState(() => ({ error: error.response.data.error }));
+        this.setState(() => ({ error: error.response.data.error }));
       });
   };
 
