@@ -10,7 +10,6 @@ router.post('/users', async (req, res) => {
     res.status(201).send(user);
   } catch (error) {
     if (error.code === 11000) {
-      console.log(error);
       if (error.errmsg.includes('cardId')) {
         return res.status(400).send({error: 'card ID must be unique'});
       } else {

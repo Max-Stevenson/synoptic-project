@@ -7,10 +7,10 @@ const { userOne, userOneId, setupDatabase } = require('./fixtures/db');
 beforeEach(setupDatabase);
 const testUser = {
   "name": "test data",
-  "employeeId": "A002",
+  "employeeId": "A000",
   "email": "test@test.com",
   "mobileNumber": "07123456789",
-  "cardId": "abc123efg456hij1",
+  "cardId": "abc123efg456hij2",
   "pin": "1234",
   "accountBalance": 0
 };
@@ -85,13 +85,24 @@ test('Authorized user cannot decrease accountBalance below 0', async () => {
 });
 
 test('Should not create a user with an existing employeeId', async () => {
-  testUser.employeeId = userOne.employeeId;
+  testUser.employeeId = userOne.employeeId;  
 
   const response = await request(app)
   .post('/api/v1/users')
   .send(testUser)
   .expect(400);
   expect(response.body.error).toBe('employee ID must be unique');
+});
+
+test('Should not create a user with an existing cardId', async () => {
+  testUser.employeeId = "0001"
+  testUser.cardId = userOne.cardId;
+
+  const response = await request(app)
+  .post('/api/v1/users')
+  .send(testUser)
+  .expect(400);  
+  expect(response.body.error).toBe('card ID must be unique');
 });
 
 test('Should return vague error for correct cardId and incorrect pin', async () => {
