@@ -31,6 +31,11 @@ class AccountDashboard extends React.Component {
 		this.props.history.push({pathname: '/top-up'});
 	};
 
+	handlePurchase = (event) => {
+		event.preventDefault();
+		this.props.history.push({pathname: '/purchase'});
+	};
+
 	render() {
 		return (
 			<div>
@@ -41,6 +46,8 @@ class AccountDashboard extends React.Component {
 					.format(convertPenceToPound(this.props.accountDetails.accountBalance))}
 				</p>
 				<button onClick={this.handleTopUp}>Top Up</button>
+				<button onClick={this.handlePurchase}>Make Purchase</button>
+
 			</div>
 		);
 	};
