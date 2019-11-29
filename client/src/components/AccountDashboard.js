@@ -1,6 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { setAccountDetails } from '../actions/userActions';
+import { 
+  setLoginPending, 
+  setLoginSuccess, 
+  setAuthorization 
+} from '../actions/loginActions';
 import { convertPenceToPound } from '../utils/currencyFormatter';
 import axios from 'axios';
 
@@ -36,6 +41,18 @@ class AccountDashboard extends React.Component {
 		this.props.history.push({pathname: '/purchase'});
 	};
 
+	handleLogout = (event) => {
+		const config = {
+			headers: { 'Authorization': sessionStorage.getItem('jwtToken') }
+		};
+		axios.post('http://localhost:3000/api/v1/users/logout',{} , config).then((res) => {
+			this.props.dispatch(setLoginPending(false));
+      this.props.dispatch(setAuthorization(false));
+			this.props.dispatch(setLoginSuccess(false));
+			this.props.history.push({pathname: '/'});
+		});
+	};
+
 	render() {
 		return (
 			<div>
@@ -47,7 +64,7 @@ class AccountDashboard extends React.Component {
 				</p>
 				<button onClick={this.handleTopUp}>Top Up</button>
 				<button onClick={this.handlePurchase}>Make Purchase</button>
-
+				<button onClick={this.handleLogout}>Logout</button>
 			</div>
 		);
 	};
