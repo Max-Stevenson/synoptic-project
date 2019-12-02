@@ -40,3 +40,15 @@ I have included some screenshots of the various requests and responses as seen i
 ![](screenshots/cardNotRegistered.png)
 ### Login Attempt with Incorrect PIN
 ![](screenshots/incorrectPin.png)
+### View Account Details
+![](screenshots/getAccount.png)
+### Edit Account Details
+![](screenshots/accountEditSuccess.png)
+### Top Up Account Balance
+![](screenshots/accountBalanceEditSuccess.png)
+### Insufficient Funds Spend Request
+![](screenshots/accountBalanceEditFail.png)
+### Unauthenticated Route
+![](screenshots/unauthenticatedRoute.png)
+### Logout Success
+![](screenshots/logoutSuccess.png)

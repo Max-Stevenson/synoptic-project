@@ -1,6 +1,7 @@
 # Design of Membership System
 
 ## Requirement Assumptions
+- Hypothetical First Catering Ltd will be able to modify their front-end service to construct API requests.
 
 
 ## API design v2.0
