@@ -220,3 +220,54 @@ Object with field to edit and new value, example.
 | 200                 | Success           | As above                         |
 | 401                 | Not authenticated | {"error": "please authenticate"} |
 | 400                 | Invalid field     | {"error": "you cannot update this field"} |
+
+
+### __Edit User Account Balance__
+
+**PATCH /api/v1/users/me/balance**
+
+IMPLEMENTATION NOTES:
+
+This endpoint edits accountBalance for registered and authenticated users.
+
+**RESPONSE CLASS (STATUS 200)**
+
+User account details.
+
+```json
+{
+  "accountBalance": 20500,
+  "_id": "5de505335c477d9c73a687ab",
+  "name": "test data",
+  "employeeId": "A002",
+  "email": "test@test.com",
+  "mobileNumber": "07738623760",
+  "cardId": "abc123efg456hij3",
+  "__v": 2
+}
+```
+
+**PARAMETERS**
+
+Object with action and amount, example.
+
+```json
+{
+  "action": "increase",
+  "amount": 20500
+}
+```
+
+| Field          | Description                                                    | Data Type |
+|----------------|----------------------------------------------------------------|-----------|
+| action         | Action to perform on accountBalance,<br>either `increase` or `decrease`| String    |
+| amount         | Value by which action will impact accountBalance               | Number    |
+
+**RESPONSE MESSAGES**
+
+| HTTP Status<br>Code | Reason            | Response Model                   |
+|---------------------|-------------------|----------------------------------|
+| 200                 | Successful update | As above                         |
+| 401                 | Not authenticated | {"error": "please authenticate"} |
+| 400                 | Insufficient funds,<br>attempt made to decrease below 0| {"error": "insufficient funds in account for purchase"|
+
