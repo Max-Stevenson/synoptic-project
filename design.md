@@ -77,19 +77,20 @@ From the given specifications I constructed the data model of a User.
   mobileNumber: {
     type: String,
     required: true,
-    max: 11
+    minlength: 11,
+    maxlength: 11
   },
   pin: {
     type: String,
     required: true,
-    min: 4,
-    max: 4
+    minlength: 4,
   },
   cardId: {
     type: String,
+    unique: true,
     required: true,
-    min: 16,
-    max: 16,
+    minlength: 16,
+    maxlength: 16,
   },
   accountBalance: {
     type: Number,
