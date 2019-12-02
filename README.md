@@ -9,6 +9,17 @@ Use the package manager [npm](https://www.npmjs.com/) to install the required mo
 npm install
 ```
 
+## Running
+1. From within the `server` directory run:
+```bash
+npm run dev
+```
+2. From within the `client` directory run:
+```bash
+webpack-dev-server
+```
+3. Either navigate to <http://localhost:8080/> to experience the front-end client, or use [Postman](https://www.getpostman.com/) to make requests directly to the API.
+
 ## Technology
 To build this project I used the following tech stack:
 

@@ -32,3 +32,11 @@ I have included some screenshots of the various requests and responses as seen i
 ### New User Creation Fail - Non unique employeeId of cardId
 ![](screenshots/incorrectEmployeeId.png)
 ![](screenshots/incorrectCardId.png)
+### Validation Error on New User Creation
+![](screenshots/validationError.png)
+### Login Success
+![](screenshots/loginSuccess.png)
+### Login Attempt with Non-registered Card
+![](screenshots/cardNotRegistered.png)
+### Login Attempt with Incorrect PIN
+![](screenshots/incorrectPin.png)
