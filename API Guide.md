@@ -127,7 +127,45 @@ A goodbye message.
 none.
 
 **RESPONSE MESSAGES**
+
 | HTTP Status<br>Code | Reason            | Response Model                   |
 |---------------------|-------------------|----------------------------------|
 | 200                 | Logout success    | As above                         |
+| 401                 | Not authenticated | {"error": "please authenticate"} |
+
+
+### __User Login__
+
+**GET /api/v1/users/me**
+
+IMPLEMENTATION NOTES:
+
+This endpoint gets account details for a registered and authenticated user.
+
+**RESPONSE CLASS (STATUS 200)**
+
+User account details.
+
+```json
+{
+  "accountBalance": 0,
+  "_id": "5de4ecec42c0598eb0de0c58",
+  "name": "test data",
+  "employeeId": "A004",
+  "email": "ihavebeenchanged@msn.com",
+  "mobileNumber": "07738623760",
+  "cardId": "abc123efg456hij4",
+  "__v": 1
+}
+```
+
+**PARAMETERS**
+
+none.
+
+**RESPONSE MESSAGES**
+
+| HTTP Status<br>Code | Reason            | Response Model                   |
+|---------------------|-------------------|----------------------------------|
+| 200                 | Success           | As above                         |
 | 401                 | Not authenticated | {"error": "please authenticate"} |
