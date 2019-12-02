@@ -19,6 +19,7 @@ not as well developed as I would have liked and as such has several limitations:
 
 - No testing.
 - Obvious lack of styling - I chose to forgo design and stlying in favour of focusing on functionality.
+- Basic instructions on TopUp page would be useful.
 - Within the [Purchase](https://github.com/Max-Stevenson/synoptic-project/blob/master/client/src/components/Purcahse.js) component there is no option for removing items added to the cart and subsequent page visits within the same session show previous cart total.
 - Within the [Login](https://github.com/Max-Stevenson/synoptic-project/blob/master/client/src/components/Login.js) component I have used action dispatches in axios callbacks - this is bad practice and the remedy is instead to use redux thunk.
 - Using sessionStorage for JWTs - potential security implications.

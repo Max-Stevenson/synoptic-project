@@ -9,6 +9,7 @@
 ## Non-functional Requirements
 - Usability: Development and execution has occurred entirely in a chrome browser with no testing in other browsers such as firefox or safari. Before going live important to consider what browsers are in place for hypothetical scenario.
 - scalability: Currently database is MongoDB Atlas - a cloud based storage solution. Has not been tested under load with multiple users concurrently.
+- accessibility: Not tested for accessibility - not optimised for use with screenreaders or any other aids.
 
 ## API design v2.0
 After initial designs were implemented I decided to extract the process of interacting with a user's accountBalance to a separate route.
