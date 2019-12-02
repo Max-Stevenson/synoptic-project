@@ -134,7 +134,7 @@ none.
 | 401                 | Not authenticated | {"error": "please authenticate"} |
 
 
-### __User Login__
+### __User Account Details__
 
 **GET /api/v1/users/me**
 
@@ -169,3 +169,54 @@ none.
 |---------------------|-------------------|----------------------------------|
 | 200                 | Success           | As above                         |
 | 401                 | Not authenticated | {"error": "please authenticate"} |
+
+
+### __User Account Edit__
+
+**PATCH /api/v1/users/me**
+
+IMPLEMENTATION NOTES:
+
+This endpoint edits account details for registered and authenticated users.
+
+**RESPONSE CLASS (STATUS 200)**
+
+User account details.
+
+```json
+{
+  "accountBalance": 0,
+  "_id": "5de4ecec42c0598eb0de0c58",
+  "name": "test data",
+  "employeeId": "A004",
+  "email": "ihavebeenchanged@msn.com",
+  "mobileNumber": "07738623760",
+  "cardId": "abc123efg456hij4",
+  "__v": 1
+}
+```
+
+**PARAMETERS**
+
+Object with field to edit and new value, example.
+
+```json
+{
+  "email": "ihavebeenchanged@msn.com"
+}
+```
+
+| Field          | Description                                                    | Data Type |
+|----------------|----------------------------------------------------------------|-----------|
+| name           | User full name                                                 | String    |
+| email          | User email - <br>must be valid email                           | String    |
+| mobileNumber   | User mobile number -<br>must be 11 chars in length             | String    |
+| pin            | Personal PIN number -<br>minimum length of 4                   | String    |
+
+**RESPONSE MESSAGES**
+
+| HTTP Status<br>Code | Reason            | Response Model                   |
+|---------------------|-------------------|----------------------------------|
+| 200                 | Success           | As above                         |
+| 401                 | Not authenticated | {"error": "please authenticate"} |
+| 400                 | Invalid field     | {"error": "you cannot update this field"} |
