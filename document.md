@@ -10,6 +10,8 @@ Some design limitations of my implementation include:
 - The welcome message returned by POST /api/v1/users/login route is somewhat redundant.
 - Could remove the get GET /api/v1/users/me route entirely and instead return user details in the aforementioned login route.
 - My attempt to meet the requirement of having the application timeout after inactivity was achieved by having short expiry times on the JSON Web Tokens (JWTs) - this proved to be very frustrating during manual testing.
+- Error messages - I have coded helpful error messages for some unhappy paths relating to employeeID and cardId not being unique
+during user creation, but other errors, such as mobileNumber validation would not render in the same way. This could be solved by ensuring all error messages have the same object design and then a single render function could be used on the front-end.
 
 ## Front-end
 Given the time constraints and my relative inexperience with React and Redux the front-end client was
