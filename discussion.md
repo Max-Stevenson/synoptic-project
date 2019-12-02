@@ -30,3 +30,9 @@ I intend on continuing with the project after it is submitted and have already t
 - Styling - integration with bootstrap to give a better and more aesthetically pleasing user experience.
 - Comprehensive tests. Integration testing of the front and back-end. End to end tests simulating complete user experience.
 - Integration with hardware. I have an arduino with a Radio Frequency Identification (RFID) reader, I have experimented with using Socket.io to send scanned card data to node applications. I would like to develop the front-end client to listen for such card scan events and pull card data directly from the hardware, rather than the user having to manually enter it.
+
+## Functional Requirements
+
+## Non-functional Requirements
+- Usability: Development and execution has occurred entirely in a chrome browser with no testing in other browsers such as firefox or safari. Before going live important to consider what browsers are in place for hypothetical scenario.
+- scalability: Currently database is MongoDB Atlas - a cloud based storage solution. Has not been tested under load with multiple users concurrently.
