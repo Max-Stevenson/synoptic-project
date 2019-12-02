@@ -6,7 +6,9 @@
   - view user account - reasonable assumption that users may want to know their balance before Topping up.
   - edit account details - reasonable assumption a user may be required to change their personal details.
 
-
+## Non-functional Requirements
+- Usability: Development and execution has occurred entirely in a chrome browser with no testing in other browsers such as firefox or safari. Before going live important to consider what browsers are in place for hypothetical scenario.
+- scalability: Currently database is MongoDB Atlas - a cloud based storage solution. Has not been tested under load with multiple users concurrently.
 
 ## API design v2.0
 After initial designs were implemented I decided to extract the process of interacting with a user's accountBalance to a separate route.

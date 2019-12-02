@@ -19,6 +19,7 @@ npm run dev
 webpack-dev-server
 ```
 3. Either navigate to <http://localhost:8080/> to experience the front-end client, or use [Postman](https://www.getpostman.com/) to make requests directly to the API.
+Refer to the [API Guide](https://github.com/Max-Stevenson/synoptic-project/blob/master/API%20Guide.md) for further info.
 
 ## Technology
 To build this project I used the following tech stack:
