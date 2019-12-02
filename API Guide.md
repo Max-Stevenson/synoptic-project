@@ -24,6 +24,7 @@ A created User object.
   "__v": 0
 }
 ```
+
 **PARAMETERS**
 
 A User object, example:
@@ -31,11 +32,11 @@ A User object, example:
 ```json
 {
   "name": "test data",
-	"employeeId": "A002",
-	"email": "test@test.com",
-	"mobileNumber": "07738623760",
-	"cardId": "abc123efg456hij3",
-	"pin": "1234"
+  "employeeId": "A002",
+  "email": "test@test.com",
+  "mobileNumber": "07738623760",
+  "cardId": "abc123efg456hij3",
+  "pin": "1234"
 }
 ```
 
@@ -77,14 +78,15 @@ A welcome message and JWT.
   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZGU0ZWNlYzQyYzA1OThlYjBkZTBjNTgiLCJpYXQiOjE1NzUyODc1OTUsImV4cCI6MTU3NTI4Nzg5NX0.q5z2t_rWALCRqdWDUdx2lEdSS47UKjY8BjQ0c10mREE"
 }
 ```
+
 **PARAMETERS**
 
 cardId and PIN, example:
 
 ```json
 {
-	"cardId": "abc123efg456hij4",
-	"pin": "1234"
+  "cardId": "abc123efg456hij4",
+  "pin": "1234"
 }
 ```
 
@@ -100,3 +102,32 @@ cardId and PIN, example:
 | 200                 | Login success    | As above                                 |
 | 400                 | Incorrect PIN    | {"error": "unable to login"}             |
 | 400                 | Incorrect cardId | {"error": "card not registered to user"} |
+
+
+### __User Logout__
+
+**POST /api/v1/users/logout**
+
+IMPLEMENTATION NOTES:
+
+This endpoint logs out a registered user.
+
+**RESPONSE CLASS (STATUS 200)**
+
+A goodbye message.
+
+```json
+{
+  "message": "goodbye test data"
+}
+```
+
+**PARAMETERS**
+
+none.
+
+**RESPONSE MESSAGES**
+| HTTP Status<br>Code | Reason            | Response Model                   |
+|---------------------|-------------------|----------------------------------|
+| 200                 | Logout success    | As above                         |
+| 401                 | Not authenticated | {"error": "please authenticate"} |

@@ -27,6 +27,7 @@ not as well developed as I would have liked and as such has several limitations:
 I intend on continuing with the project after it is submitted and have already thought of several improvements and developments I would like to implement:
 
 - Optimisation for touchscreen devices. The scenario detailed the kiosk terminals being touchscreen and so I would like to optimise for this configuration.
+- limited endpoints - currently no way to delete users other than by direct access to database.
 - Styling - integration with bootstrap to give a better and more aesthetically pleasing user experience.
 - Comprehensive tests. Integration testing of the front and back-end. End to end tests simulating complete user experience.
 - Integration with hardware. I have an arduino with a Radio Frequency Identification (RFID) reader, I have experimented with using Socket.io to send scanned card data to node applications. I would like to develop the front-end client to listen for such card scan events and pull card data directly from the hardware, rather than the user having to manually enter it.
